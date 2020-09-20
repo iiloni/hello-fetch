@@ -4,11 +4,13 @@
   "description": "A webscraper for hello-fresh",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js"
+	"start": "node src/index.js"
   },
   "author": "",
+  "type": "module",
   "license": "ISC",
   "dependencies": {
-    "jsdom": "^16.4.0"
+    "jsdom": "^16.4.0",
+    "request": "^2.88.2"
   }
 }
