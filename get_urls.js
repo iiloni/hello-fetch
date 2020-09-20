@@ -3,6 +3,7 @@ const body = document.body;
 const button = document.querySelectorAll('span[data-translation-id="recipe-archive.pagination.more-recipes"')[0];
 
 var last_scroll = 0;
+var urls = [];
 
 const interval_id = setInterval(function() {
     if(last_scroll == body.scrollHeight) // if nothing added to the page
@@ -11,7 +12,6 @@ const interval_id = setInterval(function() {
 
         // a list of links will be queried
         const links = document.querySelectorAll('a[href^="/recipes/"].dsbi');
-        const urls = [];
         
         // and those links will be parsed for the hrefs
         for(const link of links)
