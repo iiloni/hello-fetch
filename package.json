@@ -1,0 +1,14 @@
+{
+  "name": "hello-fetch",
+  "version": "1.0.0",
+  "description": "A webscraper for hello-fresh",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "jsdom": "^16.4.0"
+  }
+}
