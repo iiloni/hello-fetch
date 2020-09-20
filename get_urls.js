@@ -19,3 +19,5 @@ const interval_id = setInterval(function() {
         console.log('Clicking...');
     }   
 }, 2500);
+
+// once the script reports completion, download the HTML and use JSDOM to parse it
