@@ -1,14 +1,26 @@
+import FS from 'fs';
+
+import urls from '../urls.json';
+
 import Recipe from './recipe.js';
 
-import get from './utils/get.js';
-
 (async function main() {
-	const recipe = new Recipe('https://www.hellofresh.com/recipes/bacon-cream-supreme-spaghetti-5efb3c62a169b168fb03500d');
+	const recipes = [];
 
-	await recipe.fetchDom();
+	for(const url of urls)
+	{
+		const recipe = new Recipe(url);
+		await recipe.fetchDom();
 
-	console.log(recipe.name);
-	console.log(recipe.description);
-	console.log(recipe.formatted_instructions);
-	console.log(recipe.ingredients);
+		recipes.push({
+			name: recipe.name,
+			description: recipe.description,
+			instructions: recipe.formatted_instructions,
+			ingredients: recipe.ingredients,
+		});
+
+		console.log(`Downloaded (${ recipes.length } / ${ urls.length })`);
+	}
+
+	FS.writeFileSync('/home/joseph/recipes.json', JSON.stringify(recipes));
 })();

@@ -35,11 +35,6 @@ export default class Recipe
 		this.ingredients = this.schema.recipeIngredient;
 	}
 
-	async fetchRecommended()
-	{
-
-	}
-
 	get loaded()
 	{
 		return this.dom != null && this.schema != null;
