@@ -1,13 +1,32 @@
-// copy/paste this to automatically fetch all of the recommended links
-setInterval(function() {
-    document.querySelectorAll('span[data-translation-id="recipe-archive.pagination.more-recipes"')[0].click();
-}, 5000);
+// copy/paste this entire script into hello-fresh console
+const body = document.body;
+const button = document.querySelectorAll('span[data-translation-id="recipe-archive.pagination.more-recipes"')[0];
 
-// once complete, copy/paste this to get the entire list of urls
-const links = document.querySelectorAll('a[href^="/recipes/"].dsbi');
-const urls = [];
-for(const link of links)
-{
-     urls.push(link.href);   
-}
-console.log(urls);
+var last_scroll = 0;
+
+const interval_id = setInterval(function() {
+    if(last_scroll == body.scrollHeight) // if nothing added to the page
+    {
+        clearInterval(interval_id); // stops the button clicking
+
+        // a list of links will be queried
+        const links = document.querySelectorAll('a[href^="/recipes/"].dsbi');
+        const urls = [];
+        
+        // and those links will be parsed for the hrefs
+        for(const link of links)
+        {
+             urls.push(link.href);   
+        }
+        
+        // reports completion and full list of urls
+        console.log('Completed!');
+        console.log(urls);
+    }
+    else // there are still more items to see
+    {
+        last_scroll = body.scrollHeight;
+        button.click(); // clicks the button
+        console.log('Clicking...');
+    }   
+}, 4000);
