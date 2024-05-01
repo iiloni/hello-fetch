@@ -30,9 +30,15 @@ export default class Recipe
 		this.schema = JSON.parse(this.dom.window.document.getElementById('schema-org').innerHTML);
 
 		this.name = this.schema.name;
+		this.image = this.schema.image;
 		this.description = this.schema.description;
-		this.instructions = this.schema.recipeInstructions;
 		this.ingredients = this.schema.recipeIngredient;
+
+		this.instructions = this.schema.recipeInstructions;
+		let steps = this.dom.window.document.querySelectorAll('[data-test-id="instruction-step"]')
+		steps.forEach((s, idx) => {
+			this.instructions[idx].image = s.children[0].children[0].src
+		})
 	}
 
 	get loaded()
@@ -43,11 +49,13 @@ export default class Recipe
 	get formatted_instructions()
 	{
 		const formatted = [];
+		if (!this.instructions) { return null }
 
 		for(const instruction of this.instructions)
 		{
 			formatted.push({
 				text: instruction.text,
+				image: instruction.image,
 			});
 		}
 		return formatted;
